@@ -1,0 +1,93 @@
+<div class="h100p w100p" fxLayout="row">
+    <div fxHide.xs fxFlex.gt-xs="20" fxLayout="column" fxLayoutAlign="start start"  class="filter-box">
+        <div fxFlex="10" class="h100p w100p filter-header" fxLayoutAlign="start center" >
+            <img class="common-icon" src="../../../assets/icons/filter.svg" /> 
+            <div>Filters</div>
+            <div fxFlex="grow" fxLayoutAlign="end center" >
+                <button *ngIf="showClearFilter" mat-icon-button (click)="clearFilter()">
+                    <mat-icon>
+                        close
+                    </mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="filter-content h100p" fxFlex="90" fxLayout="column">
+            <div>
+                <div class="filter-content-header">Colour</div>
+                <div fxLayout="column" >
+                    <mat-checkbox (change)="filterOrSearchItem()" [color]="'primary'" [(ngModel)]="filterObj.colour.red">Red</mat-checkbox>
+                    <mat-checkbox (change)="filterOrSearchItem()" [color]="'primary'" [(ngModel)]="filterObj.colour.blue">Blue</mat-checkbox>
+                    <mat-checkbox (change)="filterOrSearchItem()" [color]="'primary'" [(ngModel)]="filterObj.colour.green">Green</mat-checkbox>
+                </div>
+            </div>
+            <div>
+                <div class="filter-content-header">Gender</div>
+                <div fxLayout="column" >
+                    <mat-checkbox (change)="filterOrSearchItem()" [color]="'primary'" [(ngModel)]="filterObj.gender.men">Men</mat-checkbox>
+                    <mat-checkbox (change)="filterOrSearchItem()" [color]="'primary'" [(ngModel)]="filterObj.gender.women">Women</mat-checkbox>
+                </div>
+            </div>
+            <div>
+                <div class="filter-content-header">Price</div>
+                <div fxLayout="column" >
+                    <mat-checkbox (change)="filterOrSearchItem()" [color]="'primary'" [(ngModel)]="filterObj.price.min">Rs.0-Rs.250</mat-checkbox>
+                    <mat-checkbox (change)="filterOrSearchItem()" [color]="'primary'" [(ngModel)]="filterObj.price.intermediate">Rs.251-Rs.450</mat-checkbox>
+                    <mat-checkbox (change)="filterOrSearchItem()" [color]="'primary'" [(ngModel)]="filterObj.price.max">Rs.450</mat-checkbox>
+                </div>
+            </div>
+            <div>
+                <div class="filter-content-header">Type</div>
+                <div fxLayout="column" >
+                    <mat-checkbox (change)="filterOrSearchItem()" [color]="'primary'" [(ngModel)]="filterObj.type.polo">Polo</mat-checkbox>
+                    <mat-checkbox (change)="filterOrSearchItem()" [color]="'primary'" [(ngModel)]="filterObj.type.hoodie">Hoodie</mat-checkbox>
+                    <mat-checkbox (change)="filterOrSearchItem()" [color]="'primary'" [(ngModel)]="filterObj.type.basic">Basic</mat-checkbox>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div fxLayout="column" fxFlex.xs="100" fxFlex.gt-xs="80">
+        <div fxFlex="10">
+            <div fxLayout="row" fxLayoutAlign="end center" class="search-input">
+                <mat-form-field class="example-form-field">
+                    <mat-label>Search</mat-label>
+                    <input matInput type="text" [(ngModel)]="search" (keyup)="filterOrSearchItem()">
+                    <button mat-button *ngIf="search" matSuffix mat-icon-button aria-label="Clear" (click)="search='';filterOrSearchItem();">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <button mat-button *ngIf="!search" matSuffix mat-icon-button (click)="filterOrSearchItem()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </mat-form-field>
+                <button fxHide.gt-xs mat-button mat-icon-button (click)="openFilterPopup()">
+                    <mat-icon>filter_list_off</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div *ngIf="productsToDisplay.length > 0" class="product-area" fxLayout.xs="column" fxLayout.gt-xs="row wrap" fxFlex="90" fxLayoutAlign.gt-xs="start start" fxLayoutAlign.xs="center center">
+            <div fxLayout="column" fxFlex.gt-xs="28" class="product-card product-card-desktop" ngClass.sm="product-card-tablet" *ngFor ="let item of productsToDisplay;let i =index;">
+                <div fxLayout="column" class="product-image-container w100p">
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <img  class="product-image" ngClass.sm="product-image-tablet" src='{{item?.imageURL}}'/>
+                    </div>
+                    <div fxLayoutAlign="start center">
+                        <span>{{item?.name}}</span>
+                    </div>
+                </div>
+                <div fxLayout="row">
+                    <div fxFlex="50" fxLayoutAlign="start center"><span class="font-weight-bold">{{commonService.checkCurrency(item?.currency)}} {{item?.price}}</span></div>
+                    <div fxFlex="50" fxLayoutAlign="end center">
+                        <button [disabled]="item?.quantity === 0" mat-raised-button color="primary" ngClass.gt-sm="desktop-button" ngClass.sm="tablet-button" (click)="addToCart(item, i)">
+                            {{item?.quantity === 0 ? 'Out of stock' : 'Add to Cart'}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="productsToDisplay.length === 0" class="h100p w100p" fxLayout="column" fxLayoutAlign="center center">
+            <mat-icon class="empty-product-icons">
+                storefront
+            </mat-icon>
+            <div class="empty-product-header">No Product to display</div>
+            <div class="empty-product-message">Try modifying the filters or changing the search value.</div>
+        </div>
+    </div>
+</div>

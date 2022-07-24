@@ -1,0 +1,20 @@
+<div fxLayout="row" class="w100p h100p header-toolbar">
+    <div fxFlex="grow" fxLayoutAlign="start center">
+        <div class="header-label">
+            teerex
+        </div>
+    </div>
+    <div fxFlex="grow" fxLayout="row" fxLayoutAlign="end center">
+        <div [ngClass]="{'active-header-button': isProductActive}" class="h100p header-button" fxLayoutAlign="center center" (click)="navigate('products')">
+            <img class="common-icon" src="../../../assets/icons/local_mall.svg" /> 
+            <span>Products</span>
+        </div>
+        <div [ngClass]="{'active-header-button': isCartActive}" class="h100p header-button" fxLayoutAlign="center center" (click)="navigate('cart')">
+            <img class="common-icon" src="../../../assets/icons/shopping_cart.svg" /> 
+            <span fxHide.xs>Shopping cart</span>
+            <div fxLayout="column" class="h100p " fxLayoutAlign="start start">
+                <div class="cart-items-number" fxLayoutAlign="center center">{{totalCartItems}}</div>
+            </div>
+        </div>
+    </div>
+</div>

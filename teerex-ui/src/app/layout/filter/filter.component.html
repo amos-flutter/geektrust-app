@@ -1,0 +1,60 @@
+<div class="h100p w100p">
+    <div fxLayout="column" fxLayoutAlign="start start"  class="filter-box h100p w100p">
+        <div fxFlex="10" class="h100p w100p filter-header" fxLayoutAlign="start center" >
+            <img class="common-icon" src="../../../assets/icons/filter.svg" /> 
+            <div>Filters</div>
+            <div fxFlex="grow" fxLayoutAlign="end center" >
+                <button  mat-icon-button (click)="closePopUp()">
+                    <mat-icon>
+                        close
+                    </mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="filter-content h100p" fxFlex="80" fxLayout="column">
+            <div>
+                <div class="filter-content-header">Colour</div>
+                <div fxLayout="column" >
+                    <mat-checkbox  [color]="'primary'" [(ngModel)]="filterObj.colour.red">Red</mat-checkbox>
+                    <mat-checkbox  [color]="'primary'" [(ngModel)]="filterObj.colour.blue">Blue</mat-checkbox>
+                    <mat-checkbox  [color]="'primary'" [(ngModel)]="filterObj.colour.green">Green</mat-checkbox>
+                </div>
+            </div>
+            <div>
+                <div class="filter-content-header">Gender</div>
+                <div fxLayout="column" >
+                    <mat-checkbox  [color]="'primary'" [(ngModel)]="filterObj.gender.men">Men</mat-checkbox>
+                    <mat-checkbox  [color]="'primary'" [(ngModel)]="filterObj.gender.women">Women</mat-checkbox>
+                </div>
+            </div>
+            <div>
+                <div class="filter-content-header">Price</div>
+                <div fxLayout="column" >
+                    <mat-checkbox  [color]="'primary'" [(ngModel)]="filterObj.price.min">Rs.0-Rs.250</mat-checkbox>
+                    <mat-checkbox  [color]="'primary'" [(ngModel)]="filterObj.price.intermediate">Rs.251-Rs.450</mat-checkbox>
+                    <mat-checkbox  [color]="'primary'" [(ngModel)]="filterObj.price.max">Rs.450</mat-checkbox>
+                </div>
+            </div>
+            <div>
+                <div class="filter-content-header">Type</div>
+                <div fxLayout="column" >
+                    <mat-checkbox  [color]="'primary'" [(ngModel)]="filterObj.type.polo">Polo</mat-checkbox>
+                    <mat-checkbox  [color]="'primary'" [(ngModel)]="filterObj.type.hoodie">Hoodie</mat-checkbox>
+                    <mat-checkbox  [color]="'primary'" [(ngModel)]="filterObj.type.basic">Basic</mat-checkbox>
+                </div>
+            </div>
+        </div>
+        <div class="w100p" fxFlex="10">
+            <div fxLayout="row" class="w100p filter-button">
+                <div fxFlex="grow" fxLayoutAlign="start center">
+                    <button mat-raised-button color="basic"  (click)="clearFilter()">
+                        Reset</button>
+                </div>
+                <div fxFlex="grow" fxLayoutAlign="end center">
+                    <button  mat-raised-button color="primary"  (click)="filterOrSearchItem()">
+                        Apply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~material-design-icons/iconfont/material-icons.css";
+
+.h100p{
+    height: 100% !important;
+}
+
+.w100p{
+    width: 100% !important;
+}
+html, body{
+    overflow: hidden;
+}
+body{
+    height: 100vh;
+    margin: 0px !important;
+    font-family: sans-serif;
+}
+
+.common-icon{
+    height: 24px;
+    margin-right: 3px;
+}
+
+.font-weight-bold{
+    font-weight: bold;
+}
+
+.popUpClass {
+    max-width: 100% !important;
+    .mat-dialog-container {
+        padding: 0px !important;
+    }
+    @media screen and (max-width: 599px) {
+        .mat-dialog-container {
+            border-radius: 0px !important;
+        }
+    }
+}

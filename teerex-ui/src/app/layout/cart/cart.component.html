@@ -1,0 +1,69 @@
+<div *ngIf="cartCount > 0" class="h100p w100p" fxLayout="column">
+    <div fxFlex.xs="7" fxFlex.gt-xs="15" class="cart-header">
+        Check out Items
+    </div>
+    <div fxFlex.xs="78" fxFlex.gt-xs="70" fxLayout="column" class=" w100p product-area" >
+        <div  *ngFor="let item of cartItems; let index = index">
+            <div *ngIf="item && item?.addedQuantity > 0" fxLayout="row" class="cart-container w100p">
+                <div fxLayout.xs="column" fxLayout.gt-xs="row" fxLayoutAlign="start center" fxFlex="40">
+                    <div fxFlex.xs="grow" fxFlex.gt-xs="40">
+                        <img class="product-image" src='{{item?.imageURL}}'/>
+                    </div>
+                    <div fxLayoutAlign="start center" fxFlex.gt-xs="60" fxFlex.xs="grow">
+                        <div>
+                            <span class="font-weight-bold">{{item?.name}}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="20">
+                    <div>
+                        <button mat-icon-button (click)="changeQuantity('delete', item, index)">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                    </div>
+                    <div class="cart-quantity">{{item?.addedQuantity}}</div>
+                    <div>
+                        <button mat-icon-button (click)="changeQuantity('add', item, index)">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="40" fxLayoutAlign="end center">
+                    <div fxFlex="50" fxLayoutAlign="start center">
+                        <span class="font-weight-bold">
+                            {{commonService.checkCurrency(item?.currency)}} {{itemCartPrice(item)}}
+                        </span>
+                    </div>
+                    <button mat-icon-button (click)="deleteCartItem(item, index)">
+                        <mat-icon color="warn">delete</mat-icon>
+                    </button>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    <div fxFlex="15" fxLayoutAlign="end center" class="cart-footer w100p">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex.gt-xs="40" fxLayoutAlign="end center">
+            <div fxFlex.xs="50" class="footer-price" fxLayoutAlign="start center">
+                <span class="font-weight-bold">
+                    {{cartItems ? commonService.checkCurrency(cartItems[0]?.currency) + totalCartPrice(): ''}}
+                </span>
+            </div>
+            <div fxFlex.xs="50">
+                <button mat-flat-button color="primary">Check Out</button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div *ngIf="cartCount === 0" class="h100p w100p" fxLayout="column" fxLayoutAlign="center center">
+    <mat-icon class="empty-cart-icons">
+        remove_shopping_cart
+    </mat-icon>
+    <div class="empty-cart-header">No Items</div>
+    <div class="empty-cart-message">Add Items to the cart at the moment.</div>
+</div>
